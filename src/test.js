@@ -2,9 +2,11 @@ const test = () => {
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   var schedule = require('node-schedule');
 
-  var j = schedule.scheduleJob('*/5 * * * *', function(){
-	  console.log('The answer to life, the universe, and everything!');
-	  console.log(GenerateMessage('moi'))
+  var j = schedule.scheduleJob('*/1 * * * *', function(){
+  	var randomMessage = answers[Math.floor(Math.random() * answers.length)];
+
+	console.log(randomMessage);
+	console.log(GenerateMessage('moi'))
   });
 };
 
@@ -39,9 +41,16 @@ const GenerateMessage = name => {
     "Friday",
     "Saturday"
   ];
+  var messages = [
+	"Tahia dz",
+	"213",
+	"🇩🇿🇩🇿🇩🇿",
+	"1, 2, 3 viva l'algérie"
+  ]
+  var randomMessage = messages[Math.floor(Math.random() * messages.length)];
   const d = new Date();
   const dayName = days[d.getDay()];
-  return `Zalu ${name} \n Happy ${dayName} 😊😊 `; // your message
+  return `Zalu ${name} \n Happy ${dayName} 😊😊 and ${randomMessage} `; // your message
   // My message   return `Hi ${name} Thanks for being a part of my social media network. I'am the @PicsrushE founder,A new Online Image Editor completely with web technologies,I'm also a reactjs developer and medium blogger.\n Happy to discuss anytime 😊  \n Happy ${dayName} 😊😊 `;
 };
 
