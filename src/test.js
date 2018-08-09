@@ -1,7 +1,3 @@
-const T = require("./Twit.js");
-const my_user_name = require("../config").userName;
-const timeout = 1000 * 60 * 5; // timeout to send the message 5 min
-
 const test = () => {
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   var schedule = require('node-schedule');
@@ -49,4 +45,4 @@ const GenerateMessage = name => {
   // My message   return `Hi ${name} Thanks for being a part of my social media network. I'am the @PicsrushE founder,A new Online Image Editor completely with web technologies,I'm also a reactjs developer and medium blogger.\n Happy to discuss anytime 😊  \n Happy ${dayName} 😊😊 `;
 };
 
-module.exports = AutoDM;
+module.exports = test;
