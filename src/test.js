@@ -3,9 +3,6 @@ const test = () => {
   var schedule = require('node-schedule');
 
   var j = schedule.scheduleJob('*/1 * * * *', function(){
-  	var randomMessage = answers[Math.floor(Math.random() * answers.length)];
-
-	console.log(randomMessage);
 	console.log(GenerateMessage('moi'))
   });
 };
