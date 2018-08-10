@@ -2,8 +2,8 @@ const test = () => {
 	console.log("Start Sending Auto Direct Message 🚀🚀🚀");
 	var schedule = require('node-schedule');
 	var rule = new schedule.RecurrenceRule();
-	rule.hour = 17;
-	rule.minute = 20;
+	rule.hour = 0;
+	rule.minute = 13;
 	var j = schedule.scheduleJob(rule, function(){
 		console.log(GenerateMessage('moi'))
 	});
