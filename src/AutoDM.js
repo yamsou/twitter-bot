@@ -6,7 +6,7 @@ const AutoDM = () => {
   const stream = T.stream("user");
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
-  const data = T.get('1.1/direct_messages/events/list.json', {} , 
+  const data = T.get('direct_messages/events/list.json', {} , 
     function (err, data, response) {
       console.log(data)
     });
