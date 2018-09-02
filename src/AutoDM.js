@@ -9,7 +9,7 @@ const AutoDM = () => {
   T.get('statuses/mentions_timeline', {"count": 1},
     function (err, data, response) {
       console.log(data[0].user.id_str);
-      T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data.name)}}}},
+      T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
       function (err, data, response) {
         console.log("envoi " + data);
       });
