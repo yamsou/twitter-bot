@@ -18,7 +18,7 @@ const AutoDM = () => {
     setInterval(function() {
       T.get('statuses/mentions_timeline', {"count": 10},
         function (err, data, response) {
-          //console.log(data);
+          console.log(data);
           if (data.length != 0){
             for (d in data){
               setInterval(function() {
