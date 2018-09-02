@@ -18,6 +18,7 @@ const AutoDM = () => {
     setInterval(function() {
       T.get('statuses/mentions_timeline', {"count": 1},
         function (err, data, response) {
+          console.log(data);
           if (data.length != 0){
             dbo.collection("tweets_id_already_used").find({"id_str": data[0].id_str}).toArray(function (err, results){
               console.log("id recherché : " + data[0].id_str);
