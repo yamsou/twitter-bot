@@ -34,7 +34,7 @@ const AutoDM = () => {
                     else if (results.length == 0){
                       dbo.collection("tweets_id_already_used").insert(data[i], null, function (err, results){
                         if (err) throw err;
-                        console.log('document inséré dans db');
+                        console.log('document inséré dans db : ' + data[i]);
                       })
                       var date = new Date();
                       var n = date.toDateString();
@@ -48,8 +48,9 @@ const AutoDM = () => {
                       //  console.log("envoi " + data);
                       //});
                     }
+                    i++;
                   });
-                  i++;
+                  
                 }
               }, 1000);
           }
