@@ -28,9 +28,11 @@ const AutoDM = () => {
       });
     }, 10000);
   }
-  setTimeout(function() {
-    console.log("test timeout");
-  }, 1000);
+  for (var i = 0; i<9; i++){
+    setTimeout(function() {
+      console.log("test timeout");
+    }, 1000);
+  }
   
   //const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
   //  function (err, data, response) {
