@@ -20,35 +20,38 @@ const AutoDM = () => {
         function (err, data, response) {
           console.log(data);
           if (data.length != 0){
-            for (d in data){
+              var i = 0;
               setInterval(function() {
-                dbo.collection("tweets_id_already_used").find({"id_str": data[d].id_str}).toArray(function (err, results){
-                  if (results.length != 0){
-                    console.log("id tweet deja dans la db : " + results[0].id_str);
-                    console.log("texte : " + results[0].text);
-                  }
-                  else {
-                    console.log("d: " + d);
-                    dbo.collection("tweets_id_already_used").insert(data[d], null, function (err, results){
-                      if (err) throw err;
-                      console.log('document inséré dans db');
-                    })
-                    var date = new Date();
-                    var n = date.toDateString();
-                    var time = date.toLocaleTimeString();
+                if (i < data.length){
+                  dbo.collection("tweets_id_already_used").find({"id_str": data[d].id_str}).toArray(function (err, results){
+                    if (results.length != 0){
+                      console.log("id tweet deja dans la db : " + results[0].id_str);
+                      console.log("texte : " + results[0].text);
+                    }
+                    else {
+                      console.log("d: " + d);
+                      dbo.collection("tweets_id_already_used").insert(data[d], null, function (err, results){
+                        if (err) throw err;
+                        console.log('document inséré dans db');
+                      })
+                      var date = new Date();
+                      var n = date.toDateString();
+                      var time = date.toLocaleTimeString();
 
-                    console.log('date:', n);
-                    console.log('time:',time);
-                    T.post('statuses/update', {"in_reply_to_status_id": data[d].id_str, "status": "@" + data[d].user.screen_name + " " + "salut bg"});
-                    //T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
-                    //function (err, data, response) {
-                    //  console.log("envoi " + data);
-                    //});
-                  }
-                });
+                      console.log('date:', n);
+                      console.log('time:',time);
+                      T.post('statuses/update', {"in_reply_to_status_id": data[d].id_str, "status": "@" + data[d].user.screen_name + " " + "salut bg"});
+                      //T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
+                      //function (err, data, response) {
+                      //  console.log("envoi " + data);
+                      //});
+                    }
+                  });
+                  i++;
+                }
+                
+                
               }, 1000);
-
-            }
           }
       });
     }, 15000);
