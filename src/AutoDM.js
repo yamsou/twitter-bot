@@ -7,31 +7,27 @@ const AutoDM = () => {
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
   var last_id = 0;
-  while(0){
-    setTimeout(function() {
-      T.get('statuses/mentions_timeline', {"count": 1},
-        function (err, data, response) {
-          if(data[0].id_str != last_id){
-            last_id = data[0].id_str;
-            console.log("last_id : " + last_id);
-            var date = new Date();
-            var n = date.toDateString();
-            var time = date.toLocaleTimeString();
 
-            console.log('date:', n);
-            console.log('time:',time);
-            T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": last_id}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
-            function (err, data, response) {
-              console.log("envoi " + data);
-            });
-          }
-      });
-    }, 10000);
-  }
-    setInterval(function() {
-      console.log("test timeout");
-    }, 1000);
-  
+  setInterval(function() {
+    T.get('statuses/mentions_timeline', {"count": 1},
+      function (err, data, response) {
+        if(data[0].id_str != last_id){
+          last_id = data[0].id_str;
+          console.log("last_id : " + last_id);
+          var date = new Date();
+          var n = date.toDateString();
+          var time = date.toLocaleTimeString();
+
+          console.log('date:', n);
+          console.log('time:',time);
+          T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": last_id}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
+          function (err, data, response) {
+            console.log("envoi " + data);
+          });
+        }
+    });
+  }, 10000);
+
   //const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
   //  function (err, data, response) {
   //    console.log("get 1 dm "+ data.event.message_create.message_data.text);
