@@ -7,7 +7,12 @@ const AutoDM = () => {
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
 
-  const data = T.get('direct_messages/events/list', 
+  const data = T.get('direct_messages/events/list', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": "RECIPIENT_USER_ID"}, "message_data": {"text": "Hello World!"}}}}, 
+    function (err, data, response) {
+      console.log(data);
+      console.log(err);
+    });
+  const data = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
     function (err, data, response) {
       console.log(data);
       console.log(err);
