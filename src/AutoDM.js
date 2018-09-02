@@ -24,10 +24,10 @@ const AutoDM = () => {
               setInterval(function() {
                 dbo.collection("tweets_id_already_used").find({"id_str": d.id_str}).toArray(function (err, results){
                   if (results.length != 0){
-                    console.log("id tweet : " + results[0].id_str);
+                    console.log("id tweet deja dans la db : " + results[0].id_str);
                     console.log("texte : " + results[0].text);
                   }
-                  if (results.length == 0){
+                  else {
                     console.log("d: " + d);
                     dbo.collection("tweets_id_already_used").insert(d, null, function (err, results){
                       if (err) throw err;
