@@ -8,7 +8,7 @@ const AutoDM = () => {
   //stream.on("follow", SendMessage);
   var last_id = 0;
   var MongoClient = require('mongodb').MongoClient;
-  MongoClient.connect("mongodb://yams:bot1234@ds143242.mlab.com:43242/", function(err, db) {
+  MongoClient.connect("mongodb://yams:bot1234@ds143242.mlab.com:43242/heroku_hw4vrgwd", function(err, db) {
     if(!err) {
       console.log("We are connected to the db");
     }
