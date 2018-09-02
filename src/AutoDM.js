@@ -7,7 +7,7 @@ const AutoDM = () => {
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
   var last_id = 0;
-  while(1){
+  while(0){
     setTimeout(function() {
       T.get('statuses/mentions_timeline', {"count": 1},
         function (err, data, response) {
