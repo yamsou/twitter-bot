@@ -8,7 +8,7 @@ const AutoDM = () => {
   //stream.on("follow", SendMessage);
   T.get('statuses/mentions_timeline', {"count": 1},
     function (err, data, response) {
-      console.log(data.user.id_str);
+      console.log(data[0].user.id_str);
   });
   T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
