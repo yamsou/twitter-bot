@@ -9,7 +9,8 @@ const AutoDM = () => {
 
   const data = T.get('direct_messages/events/list.json', { id: 1035263454704279558 } , 
     function (err, data, response) {
-      console.log(data)
+      console.log(data);
+      console.log(err);
     });
 };
 
