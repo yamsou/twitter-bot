@@ -8,15 +8,17 @@ const AutoDM = () => {
   //stream.on("follow", SendMessage);
   var last_id = 0;
   var MongoClient = require('mongodb').MongoClient;
-  MongoClient.connect("mongodb://yams:bot1234@ds143242.mlab.com:43242/heroku_hw4vrgwd", function(err, db) {
+  MongoClient.connect("mongodb://yams:bot1234@ds143242.mlab.com:43242/", function(err, db) {
     if(!err) {
       console.log("We are connected to the db");
     }
+    
+    var dbo = db.db("heroku_hw4vrgwd");
 
     setInterval(function() {
       T.get('statuses/mentions_timeline', {"count": 1},
         function (err, data, response) {
-          db.collection("tweets_id_already_used").insert(data, null, function (err, results){
+          dbo.collection("tweets_id_already_used").insert(data, null, function (err, results){
             if (err) throw err;
             console.log('document inséré dans db');
           })
