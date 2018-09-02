@@ -37,7 +37,7 @@ const AutoDM = () => {
 
                 console.log('date:', n);
                 console.log('time:',time);
-                T.post('statuses/update', {"in_reply_to_status_id": data[0].id_str, "status": "salut bg"});
+                T.post('statuses/update', {"in_reply_to_status_id": data[0].id_str, "status": "@" + data[0].user.screen_name + " " + "salut bg"});
                 T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
                 function (err, data, response) {
                   console.log("envoi " + data);
