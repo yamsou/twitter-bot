@@ -20,20 +20,22 @@ const AutoDM = () => {
         function (err, data, response) {
           dbo.collection("tweets_id_already_used").find({}, {"id_str": data[0].user.id_str}).toArray(function (err, results){
             console.log(results);
-          });
-          dbo.collection("tweets_id_already_used").insert(data, null, function (err, results){
-            if (err) throw err;
-            console.log('document inséré dans db');
-          })
-          var date = new Date();
-          var n = date.toDateString();
-          var time = date.toLocaleTimeString();
+            if (results.length > 0){
+              dbo.collection("tweets_id_already_used").insert(data, null, function (err, results){
+                if (err) throw err;
+                console.log('document inséré dans db');
+              })
+              var date = new Date();
+              var n = date.toDateString();
+              var time = date.toLocaleTimeString();
 
-          console.log('date:', n);
-          console.log('time:',time);
-          T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
-          function (err, data, response) {
-            console.log("envoi " + data);
+              console.log('date:', n);
+              console.log('time:',time);
+              T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
+              function (err, data, response) {
+                console.log("envoi " + data);
+              });
+            }
           });
       });
     }, 10000);
