@@ -14,7 +14,7 @@ const AutoDM = () => {
     });
   const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
     function (err, data, response) {
-      console.log(data.message_data.text);
+      console.log(data.event.message_create.message_data.text);
       console.log(err);
     });
 };
