@@ -24,7 +24,7 @@ const AutoDM = () => {
   //});
   const data3 = T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
-      console.log("get 1 user "+ data);
+      console.log("get 1 user "+ data.id);
       console.log(err);
   });
 
