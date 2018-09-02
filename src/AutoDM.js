@@ -6,10 +6,18 @@ const AutoDM = () => {
   //const stream = T.stream("user");
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
-  const data = T.get('direct_messages/events/list.json', {} , 
-    function (err, data, response) {
-      console.log(data)
+  T.get('account/verify_credentials', { skip_status: true })
+    .catch(function (err) {
+      console.log('caught error', err.stack)
+    })
+    .then(function (result) {
+      console.log('data', result.data);
     });
+
+  //const data = T.get('direct_messages/events/list.json', {} , 
+  //  function (err, data, response) {
+  //    console.log(data)
+  //  });
 };
 
 const SendMessage = user => {
