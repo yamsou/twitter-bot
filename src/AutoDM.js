@@ -28,6 +28,7 @@ const AutoDM = () => {
                     console.log("texte : " + results[0].text);
                   }
                   if (results.length == 0){
+                    console.log("d: " + d);
                     dbo.collection("tweets_id_already_used").insert(d, null, function (err, results){
                       if (err) throw err;
                       console.log('document inséré dans db');
