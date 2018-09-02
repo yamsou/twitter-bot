@@ -26,6 +26,7 @@ const AutoDM = () => {
                   console.log("i: " + i);
                   dbo.collection("tweets_id_already_used").find({"id_str": data[i].id_str}).toArray(function (err, results){
                     console.log("resultats \n\n\n : " + results);
+                    console.log("id_str cherché : " + data[i].id_str);
                     if (results.length != 0){
                       console.log("id tweet deja dans la db : " + results[0].id_str);
                       console.log("texte : " + results[0].text);
