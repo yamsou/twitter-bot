@@ -29,7 +29,7 @@ const AutoDM = () => {
                       console.log("id tweet deja dans la db : " + results[0].id_str);
                       console.log("texte : " + results[0].text);
                     }
-                    else {
+                    else if (results.length == 0){
                       dbo.collection("tweets_id_already_used").insert(data[i], null, function (err, results){
                         if (err) throw err;
                         console.log('document inséré dans db');
@@ -101,8 +101,8 @@ const GenerateMessage = name => {
   "Samedi"
   ];
   var messages = [
-  "Tahia dz",
-  "213",
+  "yo cool",
+  "salut bg",
   "🇩🇿🇩🇿🇩🇿",
   "1, 2, 3 viva l'algérie"
   ]
