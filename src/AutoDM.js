@@ -7,13 +7,19 @@ const AutoDM = () => {
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
   var last_id = 0;
+  var MongoClient = require('mongodb').MongoClient;
+  MongoClient.connect("mongodb://yams:bot1234@ds143242.mlab.com:43242/heroku_hw4vrgwd", function(err, db) {
+    if(!err) {
+      console.log("We are connected to the db");
+    }
 
-  setInterval(function() {
-    T.get('statuses/mentions_timeline', {"count": 1},
-      function (err, data, response) {
-        if(data[0].id_str != last_id){
-          last_id = data[0].id_str;
-          console.log("last_id : " + last_id);
+    setInterval(function() {
+      T.get('statuses/mentions_timeline', {"count": 1},
+        function (err, data, response) {
+          db.collections("tweets_id_already_used").insert(data, null function (err, results){
+            if (err) throw err;
+            console.log('document inséré dans db');
+          })
           var date = new Date();
           var n = date.toDateString();
           var time = date.toLocaleTimeString();
@@ -24,9 +30,11 @@ const AutoDM = () => {
           function (err, data, response) {
             console.log("envoi " + data);
           });
-        }
-    });
-  }, 10000);
+      });
+    }, 10000);
+  });
+
+  
 
   //const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
   //  function (err, data, response) {
