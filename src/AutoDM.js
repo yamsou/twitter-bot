@@ -6,16 +6,14 @@ const AutoDM = () => {
   //const stream = T.stream("user");
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
-  var user_id = T.get('users/show', {"screen_name": "yorozuyams"}, 
+  T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
-      return data.id_str;
+      T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data.id_str}, "message_data": {"text": GenerateMessage("bg")}}}},
+      function (err, data, response) {
+        console.log("envoi " + data);
+      });
   });
-  console.log("voici l'id user :" + user_id);
-  T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": "794499659230302208"}, "message_data": {"text": GenerateMessage("bg")}}}},
-    function (err, data, response) {
-      console.log("envoi " + data);
-      console.log(err);
-    });
+  
   //const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
   //  function (err, data, response) {
   //    console.log("get 1 dm "+ data.event.message_create.message_data.text);
@@ -26,12 +24,6 @@ const AutoDM = () => {
   //    console.log(data.events);
   //    console.log(err);
   //});
-  T.get('users/show', {"screen_name": "yorozuyams"}, 
-    function (err, data, response) {
-      console.log("get 1 user "+ data.id_str);
-      console.log(err);
-  });
-
 };
 
 const SendMessage = user => {
