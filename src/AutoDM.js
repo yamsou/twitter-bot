@@ -12,7 +12,7 @@ const AutoDM = () => {
       console.log(data);
       console.log(err);
     });
-  const data = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
+  const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
     function (err, data, response) {
       console.log(data);
       console.log(err);
