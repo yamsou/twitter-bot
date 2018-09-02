@@ -20,7 +20,7 @@ const AutoDM = () => {
 
           console.log('date:', n);
           console.log('time:',time);
-          T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": last_id}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
+          T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
           function (err, data, response) {
             console.log("envoi " + data);
           });
