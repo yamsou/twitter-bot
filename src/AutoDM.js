@@ -6,8 +6,12 @@ const AutoDM = () => {
   //const stream = T.stream("user");
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
-  const msg = GenerateMessage("bg");
-  const data = T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": "794499659230302208"}, "message_data": {"text": GenerateMessage("bg")}}}},
+  var user_id = T.get('users/show', {"screen_name": "yorozuyams"}, 
+    function (err, data, response) {
+      return data.id_str;
+  });
+  console.log("voici l'id user :" + user_id);
+  T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": "794499659230302208"}, "message_data": {"text": GenerateMessage("bg")}}}},
     function (err, data, response) {
       console.log("envoi " + data);
       console.log(err);
@@ -22,7 +26,7 @@ const AutoDM = () => {
   //    console.log(data.events);
   //    console.log(err);
   //});
-  const data3 = T.get('users/show', {"screen_name": "yorozuyams"}, 
+  T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
       console.log("get 1 user "+ data.id_str);
       console.log(err);
@@ -53,13 +57,13 @@ const SendMessage = user => {
 };
 const GenerateMessage = name => {
   const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
+  "Dimanche",
+  "Lundi",
+  "Mardi",
+  "Mercredi",
+  "Jeudi",
+  "Vendredi",
+  "Samedi"
   ];
   var messages = [
   "Tahia dz",
@@ -70,7 +74,7 @@ const GenerateMessage = name => {
   var randomMessage = messages[Math.floor(Math.random() * messages.length)];
   const d = new Date();
   const dayName = days[d.getDay()];
-  return `Zalu ${name} \n Happy ${dayName} 😊😊 and ${randomMessage} `; // your message
+  return `Zalu ${name}, Bon ${dayName} 😊😊 et ${randomMessage} `; // your message
   // My message   return `Hi ${name} Thanks for being a part of my social media network. I'am the @PicsrushE founder,A new Online Image Editor completely with web technologies,I'm also a reactjs developer and medium blogger.\n Happy to discuss anytime 😊  \n Happy ${dayName} 😊😊 `;
 };
 
