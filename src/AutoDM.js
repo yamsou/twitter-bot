@@ -17,11 +17,17 @@ const AutoDM = () => {
       console.log("get 1 dm "+ data.event.message_create.message_data.text);
       console.log(err);
     });
-  const data3 = T.get('direct_messages/events/list', 
+  //const data3 = T.get('direct_messages/events/list', 
+  //  function (err, data, response) {
+  //    console.log(data.events);
+  //    console.log(err);
+  //});
+  const data3 = T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
-      console.log(data.events);
+      console.log("get 1 user "+ data);
       console.log(err);
   });
+
 };
 
 const SendMessage = user => {
