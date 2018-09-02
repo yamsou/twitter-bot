@@ -8,7 +8,7 @@ const AutoDM = () => {
   //stream.on("follow", SendMessage);
   T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
-      T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data.id_str}, "message_data": {"text": GenerateMessage("bg")}}}},
+      T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data.id_str}, "message_data": {"text": GenerateMessage(data.name)}}}},
       function (err, data, response) {
         console.log("envoi " + data);
       });
