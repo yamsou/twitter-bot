@@ -9,17 +9,17 @@ const AutoDM = () => {
 
   const data = T.get('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": "2912922617"}, "message_data": {"text": "Hello World!"}}}},
     function (err, data, response) {
-      console.log(data);
+      console.log("envoi " + data);
       console.log(err);
     });
   const data2 = T.get('direct_messages/events/show', {"id": "1033956357559537668"}, 
     function (err, data, response) {
-      console.log(data.event.message_create.message_data.text);
+      console.log("get 1 dm "+ data.event.message_create.message_data.text);
       console.log(err);
     });
   const data3 = T.get('direct_messages/events/list', 
     function (err, data, response) {
-      console.log(data.events[-1].message_create);
+      console.log(data.events);
       console.log(err);
   });
 };
