@@ -16,20 +16,20 @@ const AutoDM = () => {
     var dbo = db.db("heroku_hw4vrgwd");
 
     setInterval(function() {
-      T.get('statuses/mentions_timeline', {"count": 10},
+      T.get('statuses/mentions_timeline', {"count": 5},
         function (err, data, response) {
-          console.log(data);
+          //console.log(data);
           if (data.length != 0){
               var i = 0;
               setInterval(function() {
                 if (i < data.length){
+                  console.log("i: " + i);
                   dbo.collection("tweets_id_already_used").find({"id_str": data[i].id_str}).toArray(function (err, results){
                     if (results.length != 0){
                       console.log("id tweet deja dans la db : " + results[0].id_str);
                       console.log("texte : " + results[0].text);
                     }
                     else {
-                      console.log("i: " + i);
                       dbo.collection("tweets_id_already_used").insert(data[i], null, function (err, results){
                         if (err) throw err;
                         console.log('document inséré dans db');
@@ -49,8 +49,6 @@ const AutoDM = () => {
                   });
                   i++;
                 }
-                
-                
               }, 1000);
           }
       });
