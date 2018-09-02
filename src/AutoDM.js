@@ -20,7 +20,7 @@ const AutoDM = () => {
         function (err, data, response) {
           dbo.collection("tweets_id_already_used").find({}, {"id_str": data[0].user.id_str}).toArray(function (err, results){
             console.log(results);
-          }
+          });
           dbo.collection("tweets_id_already_used").insert(data, null, function (err, results){
             if (err) throw err;
             console.log('document inséré dans db');
