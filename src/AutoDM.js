@@ -6,6 +6,10 @@ const AutoDM = () => {
   //const stream = T.stream("user");
   console.log("Start Sending Auto Direct Message 🚀🚀🚀");
   //stream.on("follow", SendMessage);
+  T.get('statuses/mentions_timeline', {"count": 1},
+    function (err, data, response) {
+      console.log(data);
+  });
   T.get('users/show', {"screen_name": "yorozuyams"}, 
     function (err, data, response) {
       T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data.id_str}, "message_data": {"text": GenerateMessage(data.name)}}}},
