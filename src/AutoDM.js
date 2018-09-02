@@ -18,7 +18,7 @@ const AutoDM = () => {
     setInterval(function() {
       T.get('statuses/mentions_timeline', {"count": 1},
         function (err, data, response) {
-          console.log(data);
+          //console.log(data);
           if (data.length != 0){
             dbo.collection("tweets_id_already_used").find({"id_str": data[0].id_str}).toArray(function (err, results){
               console.log("id recherché : " + data[0].id_str);
@@ -37,6 +37,7 @@ const AutoDM = () => {
 
                 console.log('date:', n);
                 console.log('time:',time);
+                T.post('statuses/update', {"in_reply_to_status_id": results[0].id_str, "status": "salut bg"});
                 T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
                 function (err, data, response) {
                   console.log("envoi " + data);
@@ -44,7 +45,6 @@ const AutoDM = () => {
               }
             });
           }
-
       });
     }, 61000);
   });
