@@ -16,37 +16,41 @@ const AutoDM = () => {
     var dbo = db.db("heroku_hw4vrgwd");
 
     setInterval(function() {
-      T.get('statuses/mentions_timeline', {"count": 1},
+      T.get('statuses/mentions_timeline', {"count": 10},
         function (err, data, response) {
           //console.log(data);
           if (data.length != 0){
-            dbo.collection("tweets_id_already_used").find({"id_str": data[0].id_str}).toArray(function (err, results){
-              console.log("id recherché : " + data[0].id_str);
-              if (results.length != 0){
-                console.log("id tweet : " + results[0].id_str);
-                console.log("texte : " + results[0].text);
-              }
-              if (results.length == 0){
-                dbo.collection("tweets_id_already_used").insert(data, null, function (err, results){
-                  if (err) throw err;
-                  console.log('document inséré dans db');
-                })
-                var date = new Date();
-                var n = date.toDateString();
-                var time = date.toLocaleTimeString();
+            for (d in data){
+              setInterval(function() {
+                dbo.collection("tweets_id_already_used").find({"id_str": d.id_str}).toArray(function (err, results){
+                  if (results.length != 0){
+                    console.log("id tweet : " + results[0].id_str);
+                    console.log("texte : " + results[0].text);
+                  }
+                  if (results.length == 0){
+                    dbo.collection("tweets_id_already_used").insert(d, null, function (err, results){
+                      if (err) throw err;
+                      console.log('document inséré dans db');
+                    })
+                    var date = new Date();
+                    var n = date.toDateString();
+                    var time = date.toLocaleTimeString();
 
-                console.log('date:', n);
-                console.log('time:',time);
-                T.post('statuses/update', {"in_reply_to_status_id": data[0].id_str, "status": "@" + data[0].user.screen_name + " " + "salut bg"});
-                //T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
-                //function (err, data, response) {
-                //  console.log("envoi " + data);
-                //});
-              }
-            });
+                    console.log('date:', n);
+                    console.log('time:',time);
+                    T.post('statuses/update', {"in_reply_to_status_id": d.id_str, "status": "@" + d.user.screen_name + " " + "salut bg"});
+                    //T.post('direct_messages/events/new', {"event": {"type": "message_create", "message_create": {"target": {"recipient_id": data[0].user.id_str}, "message_data": {"text": GenerateMessage(data[0].user.name)}}}},
+                    //function (err, data, response) {
+                    //  console.log("envoi " + data);
+                    //});
+                  }
+                });
+              }, 1000);
+
+            }
           }
       });
-    }, 61000);
+    }, 15000);
   });
 
   
