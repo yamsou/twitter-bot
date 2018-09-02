@@ -16,7 +16,7 @@ const AutoDM = () => {
     setInterval(function() {
       T.get('statuses/mentions_timeline', {"count": 1},
         function (err, data, response) {
-          db.collections("tweets_id_already_used").insert(data, null, function (err, results){
+          db.collection("tweets_id_already_used").insert(data, null, function (err, results){
             if (err) throw err;
             console.log('document inséré dans db');
           })
